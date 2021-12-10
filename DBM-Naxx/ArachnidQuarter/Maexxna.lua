@@ -22,9 +22,10 @@ local warnSpidersNow	= mod:NewAnnounce("WarningSpidersNow", 4, 17332)
 local timerCocoon		= mod:NewNextTimer(25, 28622)
 local timerWebSpray	= mod:NewNextTimer(30, 29484)
 local timerSpider		= mod:NewTimer(40, "TimerSpider", 17332)
+local time = GetTime()
 
 function mod:OnCombatStart(delay)
-	t = GetTime()
+	time = GetTime()
 	warnWebSpraySoon:Schedule(35.5 - delay)
 	timerWebSpray:Start(40.5 - delay)
 	warnSpidersSoon:Schedule(25 - delay)
@@ -45,7 +46,7 @@ function mod:SPELL_AURA_APPLIED(args)
 	if GetTime() - t > 1.5 and args:IsSpellID(54125) then
 		warnWebSpraySoon:Schedule(24)
 		warnWebSprayNow:Schedule(29)
-		t = GetTime()
+		time = GetTime()
 	end
 
 	if args:IsSpellID(28622) then -- Web Wrap
